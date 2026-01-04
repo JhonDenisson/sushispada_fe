@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { Sofia_Sans } from "next/font/google";
 import "./globals.css";
 
+import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/lib/providers/query-provider";
-
-import { Toaster} from "@/components/ui/sonner";
-
 
 const sofiaSans = Sofia_Sans({
   subsets: ["latin"],
@@ -25,10 +23,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`antialiased ${sofiaSans.className} dark`}>
-      <Toaster/>
-      <QueryProvider>
-        {children}
-      </QueryProvider>
+        <Toaster />
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );
