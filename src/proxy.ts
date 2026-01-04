@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-const protectedRoutes = ['/orders', '/profile', '/checkout', '/cart'];
+const protectedRoutes = ['/', '/orders', '/profile', '/checkout', '/cart'];
 
 const guestRoutes = ['/sign-up', '/sign-in'];
 
@@ -11,9 +11,13 @@ export function proxy(request: NextRequest) {
     const sessionCookie = request.cookies.get('access_token');
     const isAuthenticated = !!sessionCookie;
 
-    if (protectedRoutes.some((route) => pathname.startsWith(route))) {
+    const isProtectedRoute = protectedRoutes.some((route) =>
+        route === '/' ? pathname === '/' : pathname.startsWith(route)
+    );
+
+    if (isProtectedRoute) {
         if (!isAuthenticated) {
-            const loginUrl = new URL('/login', request.url);
+            const loginUrl = new URL('/sign-in', request.url);
             loginUrl.searchParams.set('redirect', pathname);
             return NextResponse.redirect(loginUrl);
         }
@@ -30,11 +34,12 @@ export function proxy(request: NextRequest) {
 
 export const config = {
     matcher: [
+        '/',
         '/orders/:path*',
         '/profile/:path*',
         '/checkout',
         '/cart',
-        '/login',
-        '/register',
+        '/sign-in',
+        '/sign-up',
     ],
 };

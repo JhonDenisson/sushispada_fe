@@ -6,6 +6,7 @@ import { QueryProvider } from "@/lib/providers/query-provider";
 
 import { Toaster} from "@/components/ui/sonner";
 
+
 const sofiaSans = Sofia_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
@@ -25,7 +26,9 @@ export default function RootLayout({
     <html lang="pt-BR">
       <body className={`antialiased ${sofiaSans.className} dark`}>
       <Toaster/>
-      <QueryProvider>{children}</QueryProvider>
+      <QueryProvider>
+        {children}
+      </QueryProvider>
       </body>
     </html>
   );

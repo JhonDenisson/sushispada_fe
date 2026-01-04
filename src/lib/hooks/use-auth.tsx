@@ -27,7 +27,7 @@ export function useLogin() {
         onSuccess: (user) => {
             queryClient.setQueryData(authKeys.user, user);
             toast.success(`Bem-vindo, ${user.name}!`);
-            router.push('/');
+            router.push(user.role === 'admin' ? '/admin' : '/customer');
         },
         onError: (error) => {
             if (error instanceof AxiosError) {
@@ -65,11 +65,11 @@ export function useLogout() {
         onSuccess: () => {
             queryClient.clear();
             toast.success('Até logo!');
-            router.push('/login');
+            router.push('/sign-in');
         },
         onError: () => {
             queryClient.clear();
-            router.push('/login');
+            router.push('/sign-in');
         },
     });
 }

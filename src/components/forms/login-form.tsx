@@ -42,7 +42,7 @@ export function LoginForm({
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
-        <CardHeader>
+        <CardHeader className="text-center">
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
             Enter your email below to login to your account
@@ -56,7 +56,7 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="your@email.com"
                   required
                   {...form.register('username')}
                 />

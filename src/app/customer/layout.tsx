@@ -1,0 +1,13 @@
+'use client';
+import { useAuth } from '@/lib/hooks/use-auth';
+import { redirect } from 'next/navigation';
+
+export default function CustomerLayout({ children } : { children: React.ReactNode }) {
+    const { user, isLoading } = useAuth();
+    if (isLoading) return <div>Carregando...</div>;
+
+    if (user?.role !== 'customer') {
+        redirect('/');
+    }
+    return <>{children}</>;
+}
