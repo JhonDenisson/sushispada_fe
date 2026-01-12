@@ -46,7 +46,7 @@ export function useRegister() {
     onSuccess: (user) => {
       queryClient.setQueryData(authKeys.user, user);
       toast.success("Conta criada com sucesso!");
-      router.push("/");
+      router.push(user.role === "admin" ? "/admin" : "/customer");
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
