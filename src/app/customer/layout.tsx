@@ -1,17 +1,20 @@
-"use client";
-import { redirect } from "next/navigation";
-import { useAuth } from "@/lib/hooks/use-auth";
+'use client';
+import { Footer } from '@/components/layout/footer';
+import { Header } from '@/components/layout/header';
 
-export default function CustomerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { user, isLoading } = useAuth();
-  if (isLoading) return <div>Carregando...</div>;
+import { useAuth } from '@/lib/hooks/use-auth';
 
-  if (user?.role !== "customer") {
-    redirect("/");
-  }
-  return <>{children}</>;
+export default function CustomerLayout({ children }: { children: React.ReactNode }) {
+    const { isLoading } = useAuth();
+
+    if (isLoading) return (
+      <div className="flex h-screen items-center justify-center">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    )
+
+    return <>
+      <Header/>
+      {children}
+    </>;
 }

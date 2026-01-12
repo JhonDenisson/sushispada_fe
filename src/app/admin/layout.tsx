@@ -1,5 +1,5 @@
 "use client";
-import { redirect } from "next/navigation";
+import { Header } from "@/components/layout/header";
 import { useAuth } from "@/lib/hooks/use-auth";
 
 export default function AdminLayout({
@@ -7,11 +7,15 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const { user, isLoading } = useAuth();
-  if (isLoading) return <div>Carregando...</div>;
+  const { isLoading } = useAuth();
 
-  if (user?.role !== "admin") {
-    redirect("/");
-  }
-  return <>{children}</>;
+  if (isLoading) return (
+    <div className="flex h-screen items-center justify-center">
+      <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  )
+  return <>
+    <Header/>
+    {children}
+  </>;
 }
