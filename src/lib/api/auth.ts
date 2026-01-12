@@ -23,6 +23,6 @@ export const authApi = {
 
   getCurrentUser: async (): Promise<User> => {
     const { data } = await apiClient.get("/auth/me");
-    return userSchema.parse(data.user);
+    return userSchema.parse(data);
   },
 };
