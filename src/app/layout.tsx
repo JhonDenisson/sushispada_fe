@@ -11,8 +11,9 @@ const sofiaSans = Sofia_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Sushispada",
-  description: "Sushi Delivery App",
+  title: "Sushispada | Delivery japonês",
+  description:
+    "Aplicação full-stack para pedidos e gestão de um restaurante japonês.",
 };
 
 export default function RootLayout({
