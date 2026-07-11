@@ -3,7 +3,13 @@ import { NextResponse } from "next/server";
 
 const guestRoutes = ["/sign-up", "/sign-in"];
 const adminRoutes = ["/admin"];
-const customerRoutes = ["/customer", "/orders", "/profile", "/checkout", "/cart"];
+const customerRoutes = [
+  "/customer",
+  "/orders",
+  "/profile",
+  "/checkout",
+  "/cart",
+];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

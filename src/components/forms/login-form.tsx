@@ -40,9 +40,9 @@ export function LoginForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle>Login to your account</CardTitle>
+          <CardTitle>Bem-vindo de volta</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Entre para acessar seu cardápio e seus pedidos.
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -53,7 +53,7 @@ export function LoginForm({
                 <Input
                   id="email"
                   type="email"
-                  placeholder="your@email.com"
+                  placeholder="voce@email.com"
                   required
                   {...form.register("username")}
                 />
@@ -65,7 +65,7 @@ export function LoginForm({
               </Field>
               <Field>
                 <div className="flex items-center">
-                  <FieldLabel htmlFor="password">Password</FieldLabel>
+                  <FieldLabel htmlFor="password">Senha</FieldLabel>
                 </div>
                 <Input
                   id="password"
@@ -81,15 +81,20 @@ export function LoginForm({
               </Field>
               <Field>
                 <Button
-                  variant={"outline"}
+                  className="w-full"
                   type="submit"
                   disabled={login.isPending}
                 >
-                  {login.isPending ? "Logging in..." : "Login"}
+                  {login.isPending ? "Entrando..." : "Entrar"}
                 </Button>
                 <FieldDescription className="text-center">
-                  Don&apos;t have an account?{" "}
-                  <Link href="/sign-up">Sign up</Link>
+                  Ainda não possui uma conta?{" "}
+                  <Link
+                    className="text-primary hover:underline"
+                    href="/sign-up"
+                  >
+                    Cadastre-se
+                  </Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>
