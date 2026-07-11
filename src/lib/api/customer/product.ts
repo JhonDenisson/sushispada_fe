@@ -1,12 +1,15 @@
-import type { Product } from "@/lib/schemas/product";
+import type { PaginatedProducts, Product } from "@/lib/schemas/product";
 import { apiClient } from "../client";
 
 export const customerProductsApi = {
   index: async (categoryId?: number) => {
-    const { data } = await apiClient.get<Product[]>("/customers/products", {
-      params: categoryId ? { category_id: categoryId } : undefined,
-    });
-    return data;
+    const { data } = await apiClient.get<PaginatedProducts>(
+      "/customers/products",
+      {
+        params: categoryId ? { category_id: categoryId } : undefined,
+      },
+    );
+    return data.data;
   },
 
   show: async (id: number) => {

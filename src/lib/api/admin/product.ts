@@ -1,12 +1,12 @@
-import type { Product } from "@/lib/schemas/product";
+import type { PaginatedProducts, Product } from "@/lib/schemas/product";
 import { apiClient } from "../client";
 
 export const adminProductsApi = {
   index: async (params?: { category_id?: number; search?: string }) => {
-    const { data } = await apiClient.get<Product[]>("/admin/products", {
+    const { data } = await apiClient.get<PaginatedProducts>("/admin/products", {
       params,
     });
-    return data;
+    return data.data;
   },
 
   show: async (id: number) => {
@@ -15,12 +15,16 @@ export const adminProductsApi = {
   },
 
   create: async (product: Partial<Product>) => {
-    const { data } = await apiClient.post<Product>("/admin/products", product);
+    const { data } = await apiClient.post<Product>("/admin/products", {
+      product,
+    });
     return data;
   },
 
   update: async (id: number, product: Partial<Product>) => {
-    const { data } = await apiClient.patch<Product>(`/admin/products/${id}`, product);
+    const { data } = await apiClient.patch<Product>(`/admin/products/${id}`, {
+      product,
+    });
     return data;
   },
 
