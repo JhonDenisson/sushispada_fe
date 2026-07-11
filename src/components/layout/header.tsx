@@ -1,5 +1,6 @@
 "use client";
-import { useAuth, useLogout } from "@/lib/hooks/use-auth";
+import { LogOut, User } from "lucide-react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -7,7 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { User, LogOut } from "lucide-react";
+import { useAuth, useLogout } from "@/lib/hooks/use-auth";
 export function Header() {
   const { user } = useAuth();
   const logout = useLogout();
@@ -15,11 +16,24 @@ export function Header() {
     <header className="border-b bg-card">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-xl font-bold">Sushispada</h1>
+          <Link
+            href={user?.role === "admin" ? "/admin" : "/customer"}
+            className="text-xl font-bold"
+          >
+            Sushispada
+          </Link>
           {user?.role === "admin" && (
             <span className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary">
               Admin
             </span>
+          )}
+          {user?.role === "admin" && (
+            <Link
+              className="text-sm text-muted-foreground hover:text-foreground"
+              href="/admin/products"
+            >
+              Produtos
+            </Link>
           )}
         </div>
         <DropdownMenu>
